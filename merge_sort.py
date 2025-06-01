@@ -17,4 +17,3 @@ def merge(left,right):
 
 arr=[39,53,13,36,73,24]
 sorted_arr=merge_sort(arr)
-print(sorted_arr)
