@@ -11,3 +11,5 @@ def remove_character(string,char):
 string="my name is Nizzzshantzzz Kumarzzz Jhzzza"
 new_string=remove_character(string,"z")
 print(new_string)
+
+#OUTPUT: my name is Nishant Kumar Jha
