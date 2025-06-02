@@ -1,4 +1,4 @@
-from linked_list import node,create_ll,display_ll
+from python.linkedList.linked_list import node,create_ll,display_ll
 head=create_ll()
 display_ll(head)
 def insert_at_begin(head,data):
