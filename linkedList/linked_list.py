@@ -48,9 +48,7 @@ def length_using_recursion(head):
 # print(lenght(list))
 #
 # print(length_using_recursion(list))
-
-
-
+#
 
 
 
