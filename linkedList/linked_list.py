@@ -19,7 +19,15 @@ def create_ll():
             tail=new_node
         data = int(input("Enter the element of the link list:-"))
     return head
-
+def create_using_list(nums):
+    if not nums:
+        return None
+    head=node(nums[0])
+    temp=head
+    for items in nums[1:]:
+        temp.next=node(items)
+        temp=temp.next
+    return head
 def display_ll(head):
     temp = head
     while temp is not None:
