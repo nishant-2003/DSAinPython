@@ -30,7 +30,7 @@ def print_tree_detailed(root):
 # root.child.append(child1)
 # child1.child.append(child2)
 # root.child.append(child3)
-#
-print_tree(root)
-print()
-print_tree_detailed(root)
+# #
+# print_tree(root)
+# print()
+# print_tree_detailed(root)
