@@ -43,11 +43,31 @@ def height_of_tree(root):
         max_height=max(max_height,height_of_tree(Child))
         height=height+max_height
     return height
+def preorder_traversal(root):
+    if root is None:
+        return
+    print(root.data,end="  ")
+    for eachChild in root.child:
+        preorder_traversal(eachChild)
+
+def postOrder_traversal(root):
+    if root is None:
+        return
+    for eachChild in root.child:
+        postOrder_traversal(eachChild)
+    print(root.data, end=" ")
+
+
 
 
 
 
 root = take_input_levelwise()
 print_tree_detailed(root)
+print("total nodes")
 print(count_nodes(root))
 print(height_of_tree(root))
+print("pre-order traversal")
+print(preorder_traversal(root))
+print("post-order traversal")
+print(postOrder_traversal(root))
