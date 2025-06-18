@@ -39,6 +39,23 @@ def take_input_levelwise():
             current_child.right=right_node
             queue.append(right_node)
     return root
+def height(root):
+    if root is None:
+        return 0
+    left_height=height(root.left)
+
+    right_height=height(root.right)
+    heightOfTree=1+max(left_height,right_height)
+    return heightOfTree
+def diameter(root):
+    if root is None:
+        return 0
+    leftHeight=height(root.left)
+    rightHeight=height(root.right)
+    left_diameter=diameter(root.left)
+    right_diameter=diameter(root.right)
+    ans=max(left_diameter,right_diameter,leftHeight+rightHeight)
+    return ans
 def print_data(root):
     if root is None:#Base Case
         return
@@ -57,3 +74,4 @@ def print_data(root):
 print("Enter the data for binary tree (-1 for no node)")
 root=take_input_levelwise()
 print_data(root)
+print(height(root))
