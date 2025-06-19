@@ -7,6 +7,8 @@ class Node:
     def __repr__(self):
         return f"{self.data}"
 
+
+
 def take_input():
     data=int(input("Enter the data for the node:"))
     if data == -1:
@@ -17,6 +19,8 @@ def take_input():
     print(f"The right child of {data}")
     root.right=take_input()
     return root
+
+
 
 
 def take_input_levelwise():
@@ -39,6 +43,9 @@ def take_input_levelwise():
             current_child.right=right_node
             queue.append(right_node)
     return root
+
+
+
 def height(root):
     if root is None:
         return 0
@@ -47,6 +54,10 @@ def height(root):
     right_height=height(root.right)
     heightOfTree=1+max(left_height,right_height)
     return heightOfTree
+
+
+
+
 def diameter(root):
     if root is None:
         return 0
@@ -56,6 +67,30 @@ def diameter(root):
     right_diameter=diameter(root.right)
     ans=max(left_diameter,right_diameter,leftHeight+rightHeight)
     return ans
+
+
+#SOLVE IT AGAIN
+# def diameter_of_tree_optimized(root):
+#     if root is None:
+#         return 0
+#     left_height,left_diameter=diameter_of_tree_optimized(root.left)
+#     right_height,right_diameter=diameter_of_tree_optimized(root.right)
+#     diameter_thorough_root=left_height+right_height
+#     #left_diameter
+#     #right_diameter
+#     ans_diameter=max(diameter_thorough_root,left_diameter,right_diameter)
+#     current_tree_height=1+max(left_height,right_height)
+#     return current_tree_height,ans_diameter
+
+
+
+def is_balanced_tree(root):
+    pass
+
+
+
+
+
 def print_data(root):
     if root is None:#Base Case
         return
@@ -71,7 +106,38 @@ def print_data(root):
     print_data(root.left)
     print_data(root.right)
 
+def preorder_traversal(root):
+    if root is None:
+        return 0
+    print(root.data, end=" ")
+    preorder_traversal(root.left)
+    preorder_traversal(root.right)
+    return None
+
+
+def postorderTraversal(root):
+    if root is None:
+        return 0
+    postorderTraversal(root.left)
+    postorderTraversal(root.right)
+    print(root.data, end=" ")
+    return None
+
+def InOrderTraversal(root):
+    if root is None:
+        return 0
+    postorderTraversal(root.left)
+    print(root.data, end=" ")
+    postorderTraversal(root.right)
+
+    return None
+
+
+
+
 print("Enter the data for binary tree (-1 for no node)")
 root=take_input_levelwise()
 print_data(root)
-print(height(root))
+print(preorder_traversal(root))
+print(postorderTraversal(root))
+print(InOrderTraversal(root))
