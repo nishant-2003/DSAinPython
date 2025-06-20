@@ -40,14 +40,23 @@ def print_BSTNode(root):
 def print_bst_in_range(root,low,high):
     if root is None:
         return
-    if (low<root.data):
+    if low<root.data:
         print_bst_in_range(root.left,low,high)
-    if (low<=root.data<=high):
+    if low<=root.data<=high:
         print(root.data, end=" ")
-    if (high > root.data):
+    if high > root.data:
         print_bst_in_range(root.right,low,high)
 
 
+def check_bst_using_range_limit (root,minimum,maximum):
+    if root is None:
+        return True
+
+    if root.data< minimum or root.data>maximum:
+        return False
+    ansLeft=check_bst_using_range_limit(root.left , minimum , root.left-1)
+    ansRight=check_bst_using_range_limit(root.right,root.data+1,maximum)
+    return ansLeft and ansRight
 
 
 
