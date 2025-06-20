@@ -24,6 +24,11 @@ def search(root,value):
     else:
         search (root.right,value)
 
+
+def isBST(root):
+    pass
+
+
 def print_BSTNode(root):
     if root is None:
         return
