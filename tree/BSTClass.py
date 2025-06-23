@@ -1,67 +1,90 @@
-from binarySearchTree import print_BSTNode
-
 class BSTNode:
     def __init__(self,data):
         self.data=data
-        self.left=None
         self.right=None
+        self.left=None
+    def add_child(self,data):
+        if data ==self.data:
+            return
+        if data<self.data:
+            if self.left:
+                self.left.add_child(data)
+            else:
+                self.left=BSTNode(data)
 
-class BST:
-    def __init__(self):
-        self.root=None
-    def insert(self,data):
-        self.root= self.insert_helper(data , self.root)
-    def insert_helper(self,data,node):
-        if node is None:
-            newNode= BSTNode(data)
-            return newNode
-        if data < node.data:
-            node.left=self.insert_helper(data,node.left)
-        else:
-            node.right=self.insert_helper(data,node.right)
-        return node
+        if  data>self.data:
+            if data==self.data:
+                return
+            if data>self.data:
+                if self.right:
+                    self.right.add_child(data)
+                else:
+                    self.right=BSTNode(data)
+
+    def in_order_traversal(self):
+        element=[]
+        if self.left:
+            element+=self.left.in_order_traversal()
+        element.append(self.data)
+        if self.right:
+            element+=self.right.in_order_traversal()
+        return element
 
 
     def search(self,data):
-        return self.searchHelper(data,self.root)
-
-    def searchHelper(self,data,root):
-        if root is None:
-            return False
-        if root.data == data:
+        if data==self.data:
             return True
-        if data < root.data:
-            return self.searchHelper(data,root.left)
+        if data<self.data:
+            if self.left:
+                return self.left.search(data)
+            else:
+                return False
         else:
-            return self.searchHelper(data,root.right)
-    def get_min_node(self,node):
-        current=node
-        while (current.left is not None):
-            current=current.left
-        return current
-    def delete_helper(self,data,root):
-        if root is None:
-            return None
-        if (data<root.data):
-            root.left=self.delete_helper(data,root.left)
-        elif(data>root.data):
-            root.data=self.delete_helper(data,root.right)
+            if self.right:
+                return self.right.search(data)
+            else:
+                return False
+    def find_max(self):
+        if self.right is None:
+            return self.data
+        ans= self.right.find_max()
+        return ans
+    def find_min(self):
+        if self.left is None:
+            return self.data
+        return self.left.find_min()
+
+
+    def delete_node(self,data):
+        if data<self.data:
+            if self.left:
+                self.left.delete_node(data)
+        elif data > self.data:
+            if self.right:
+                self.right.delete_node(data)
         else:
-            if root.left is None:
-                return root.right
-            elif root.right is None:
-                return root.left
+            if self.left is None and self.right is None:
+                return None
+            if self.left is None:
+                return self.right
+            if self.right is None:
+                return self.left
+            min_val= self.right.find_min()
+            self.data=min_val
+            self.right=self.right.delete_node(data)
+        return self
 
-            min_largest_node=self.get_min_node(root.right)
-            root.data=min_largest_node.data
-            root.right=self.delete(min_largest_node.data,root.right)
 
-    def delete(self,data):
-        return self.searchHelper(data,self.root)
 
-bstObject= BST()
-bstObject.insert(10)
-bstObject.insert(20)
-bstObject.insert(30)
-bstObject.insert(40)
-print_BSTNode(bstObject.root)
+def build_tree(element):
+        root=BSTNode(element[0])
+        for i in range(1,len(element)):
+            root.add_child(element[i])
+        return root
+if __name__ == '__main__':
+    numbers=[11,12,23,8,45,66,34,21]
+    number_tree= build_tree(numbers)
+    print(number_tree.in_order_traversal())
+    print(number_tree.search(200))
+    number_tree.delete_node(23)
+    print(number_tree.in_order_traversal())
